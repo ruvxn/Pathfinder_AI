@@ -44,10 +44,11 @@ def CheckAdjacency(Currentnode):
             DiscoveredNodes[i[1]] = i[2]['weight']
         elif i[1] == Currentnode:
             AdjacentNodes[i[0]] = i[2]['weight']  
+            
     return AdjacentNodes
 
 def CheckWeight(MoveableNodes):
-
+    
     SmallestWeight = 1000
     SmallestNode = None
     for Node  in MoveableNodes:
@@ -81,11 +82,16 @@ while DestinationNode != CurrentNode:
 
         Adj = CheckAdjacency(CurrentNode) 
         
-        print("Adjacent Nodes with Weights:", Adj) #bugtesting 
+        print("Adjacent Nodes with Weights Before Filter:", Adj) #bugtesting 
 
         Adj ={node: weight for node, weight in Adj.items() if node not in ParentNodes} #filters out parent nodes (otherwise it gets stuck in an infinate loop)
         print("Adjacent Nodes with Weights:", Adj) #bugtesting 
-  
+        print(DiscoveredNodes)
+        if not Adj:
+            print("No valid moves available. Stuck!")
+            break
+
+            
         SmallestNode = CheckWeight(Adj)
         print("Smallest Node:", SmallestNode) #bugtesting 
         ParentNodes[Steps] = CurrentNode
