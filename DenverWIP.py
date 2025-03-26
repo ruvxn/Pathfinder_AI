@@ -30,24 +30,20 @@ CurrentNode = SourceNode
 DestinationNode = 6
 ParentNodes = {}
 Steps = 0
+DiscoveredNodes = {}
 #print(Graph.edges(data=True))
 
 
 #checks what nodes are connected by comparing the current node to the edge list 
-def CheckAdjacency(Currentnode, Destinationnode):
+def CheckAdjacency(Currentnode):
     AdjacentNodes = {}
     for i in Graph.edges(data=True): # Add adjacent node and its weight
         if i[0] == Currentnode:
             
             AdjacentNodes[i[1]] = i[2]['weight']  
+            DiscoveredNodes[i[1]] = i[2]['weight']
         elif i[1] == Currentnode:
-
-            AdjacentNodes[i[0]] = i[2]['weight'] 
-    for node in AdjacentNodes: 
-        if node in AdjacentNodes == DestinationNode:
-            MoveTo(node, CurrentNode)
-            break
-    AdjacentNodes = {node: weight for node, weight in AdjacentNodes.items() if node not in ParentNodes} #filters out parent nodes (otherwise it gets stuck in an infinate loop)
+            AdjacentNodes[i[0]] = i[2]['weight']  
     return AdjacentNodes
 
 def CheckWeight(MoveableNodes):
@@ -73,7 +69,6 @@ def MoveTo(SmallestWeight, CurrentNode, ParentNodes = {}):
 nx.draw_shell(Graph, with_labels=True)
 edge_labels = nx.get_edge_attributes(Graph, 'weight')
 nx.draw_networkx_edge_labels(Graph, pos=nx.shell_layout(Graph), edge_labels=edge_labels)
-
 plt.show() 
 while DestinationNode != CurrentNode:
     
@@ -84,15 +79,10 @@ while DestinationNode != CurrentNode:
 
 
 
-        Adj = CheckAdjacency(CurrentNode, DestinationNode) 
+        Adj = CheckAdjacency(CurrentNode) 
         
         print("Adjacent Nodes with Weights:", Adj) #bugtesting 
 
-        if not Adj:
-            print("No valid moves available. Stuck!")
-            break
-
-        
         Adj ={node: weight for node, weight in Adj.items() if node not in ParentNodes} #filters out parent nodes (otherwise it gets stuck in an infinate loop)
         print("Adjacent Nodes with Weights:", Adj) #bugtesting 
   
