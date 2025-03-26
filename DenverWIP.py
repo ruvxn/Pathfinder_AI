@@ -70,24 +70,24 @@ nx.draw_networkx_edge_labels(Graph, pos=nx.shell_layout(Graph), edge_labels=edge
 plt.show() 
 while DestinationNode != CurrentNode:
     
-    if CurrentNode == DestinationNode:
+    if CurrentNode == DestinationNode: #checks if the current node is the destination node before running the rest of the code 
         print("Destination Reached")
     else:
         print("Destination not reached")
 
 
 
-        Adj = CheckAdjacency(CurrentNode)
+        Adj = CheckAdjacency(CurrentNode) 
         
-        print("Adjacent Nodes with Weights:", Adj)
+        print("Adjacent Nodes with Weights:", Adj) #bugtesting 
 
-        adj ={node: weight for node, weight in adj.items() if node not in ParentNodes}
-        print("Adjacent Nodes with Weights:", Adj)
+        Adj ={node: weight for node, weight in Adj.items() if node not in ParentNodes} #filters out parent nodes (otherwise it gets stuck in an infinate loop)
+        print("Adjacent Nodes with Weights:", Adj) #bugtesting 
 
         SmallestNode = CheckWeight(Adj)
-        print("Smallest Node:", SmallestNode)
+        print("Smallest Node:", SmallestNode) #bugtesting 
         ParentNodes[Steps] = CurrentNode
         CurrentNode = (MoveTo(SmallestNode, CurrentNode))
         Steps += 1
-        print("Parent Nodes:", ParentNodes)
-        print("Steps:", Steps)
+        print("Parent Nodes:", ParentNodes) #Bug testing 
+        print("Steps:", Steps) #bugtesting 
