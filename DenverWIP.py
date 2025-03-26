@@ -34,13 +34,20 @@ Steps = 0
 
 
 #checks what nodes are connected by comparing the current node to the edge list 
-def CheckAdjacency(Currentnode):
+def CheckAdjacency(Currentnode, Destinationnode):
     AdjacentNodes = {}
     for i in Graph.edges(data=True): # Add adjacent node and its weight
         if i[0] == Currentnode:
+            
             AdjacentNodes[i[1]] = i[2]['weight']  
         elif i[1] == Currentnode:
-            AdjacentNodes[i[0]] = i[2]['weight']  
+
+            AdjacentNodes[i[0]] = i[2]['weight'] 
+    for node in AdjacentNodes: 
+        if node in AdjacentNodes == DestinationNode:
+            MoveTo(node, CurrentNode)
+            break
+    AdjacentNodes = {node: weight for node, weight in AdjacentNodes.items() if node not in ParentNodes} #filters out parent nodes (otherwise it gets stuck in an infinate loop)
     return AdjacentNodes
 
 def CheckWeight(MoveableNodes):
@@ -77,13 +84,18 @@ while DestinationNode != CurrentNode:
 
 
 
-        Adj = CheckAdjacency(CurrentNode) 
+        Adj = CheckAdjacency(CurrentNode, DestinationNode) 
         
         print("Adjacent Nodes with Weights:", Adj) #bugtesting 
 
+        if not Adj:
+            print("No valid moves available. Stuck!")
+            break
+
+        
         Adj ={node: weight for node, weight in Adj.items() if node not in ParentNodes} #filters out parent nodes (otherwise it gets stuck in an infinate loop)
         print("Adjacent Nodes with Weights:", Adj) #bugtesting 
-
+  
         SmallestNode = CheckWeight(Adj)
         print("Smallest Node:", SmallestNode) #bugtesting 
         ParentNodes[Steps] = CurrentNode
