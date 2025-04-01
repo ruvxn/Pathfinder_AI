@@ -2,6 +2,7 @@ import sys
 from utils.graph import Graph
 from methods.dfs import DFS
 from methods.bfs import BFS
+from methods.gbfs import GBFS
 
 
 
@@ -45,7 +46,18 @@ def main():
 
 
     elif method == "GBFS":
-        pass
+
+        search_method= GBFS()
+        path, cost = search_method.search(graph, graph.origin, graph.destination)
+
+        print(f"{filename} {method}")
+        goal_node = path[-1]
+        print(f"{goal_node} {len(path)}")
+        print(" ".join(str(n) for n in path))
+
+
+
+
     elif method == "ASTAR":
         pass
     elif method == "CUS1":
