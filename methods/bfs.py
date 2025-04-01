@@ -15,7 +15,7 @@ class BFS:
             if current not in visited:
                 visited.add(current)
 
-                for neighbor, _ in graph.neighbors(current):
+                for neighbor, _ in sorted(graph.neighbors(current)):
                     if neighbor not in visited:
                         new_path = path + [neighbor]
                         queue.append(new_path)
