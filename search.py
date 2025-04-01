@@ -1,6 +1,8 @@
 import sys
 from utils.graph import Graph
 from methods.dfs import DFS
+from methods.bfs import BFS
+
 
 
 def main():
@@ -15,14 +17,15 @@ def main():
     graph = Graph()
     graph.load_file(filename)
 
-    print("graph loaded successfully")
-    print(f"Origin: {graph.origin}")
-    print(f"Destinations: {list(graph.destination.keys())}")
+    #print("graph loaded successfully")
+    #print(f"Origin: {graph.origin}")
+    #print(f"Destinations: {list(graph.destination.keys())}")
 
     if method == "DFS":
 
         search_method = DFS()  
         path, cost = search_method.search(graph, graph.origin, graph.destination)
+
         print(f"{filename} {method}")
         goal_node = path[-1]
         print(f"{goal_node} {len(path)}")
@@ -30,7 +33,17 @@ def main():
 
 
     elif method == "BFS":
-        pass
+        
+        search_method = BFS()
+        path, cost = search_method.search(graph, graph.origin, graph.destination)
+
+        print(f"{filename} {method}")
+        goal_node = path[-1]
+        print(f"{goal_node} {len(path)}")
+        print(" ".join(str(n) for n in path))
+
+
+
     elif method == "GBFS":
         pass
     elif method == "ASTAR":
