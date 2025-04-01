@@ -1,5 +1,7 @@
 import sys
 from utils.graph import Graph
+from methods.dfs import DFS
+
 
 def main():
     if len(sys.argv) != 3: # The number of arguments includes script, file and search method
@@ -18,7 +20,15 @@ def main():
     print(f"Destinations: {list(graph.destination.keys())}")
 
     if method == "DFS":
-        pass  
+
+        search_method = DFS()  
+        path, cost = search_method.search(graph, graph.origin, graph.destination)
+        print(f"{filename} {method}")
+        goal_node = path[-1]
+        print(f"{goal_node} {len(path)}")
+        print(" ".join(str(n) for n in path))
+
+
     elif method == "BFS":
         pass
     elif method == "GBFS":
