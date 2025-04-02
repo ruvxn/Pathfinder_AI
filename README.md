@@ -5,7 +5,7 @@ Pathfinder_AI is a part of Assignment 2A for the COS30019 - Introduction to Arti
 
 ## Project Structure
 
-![Project Structure](Assets/structure.png)
+![Project Structure](Assets/structure2.png)
 
 
 ##  How It Works
