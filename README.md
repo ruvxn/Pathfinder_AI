@@ -5,28 +5,7 @@ Pathfinder_AI is a part of Assignment 2A for the COS30019 - Introduction to Arti
 
 ## Project Structure
 
-PATHFINDER_AI/
-├── methods/
-│   ├── dfs.py
-│   ├── bfs.py
-│   ├── gbfs.py
-│   ├── astar.py
-│   ├── cus1.py
-│   └── cus2.py
-│
-├── utils/
-│   ├── graph.py
-│   └── heuristics.py
-│
-├── tests/
-│   ├── PathFinder-test.txt
-│   ├── test2.txt
-│   ├── test3.txt
-│   └── test4.txt
-│
-├── search.py
-├── README.md
-└── .gitignore
+[Project Structure](Assets/structure.png)
 
 
 ##  How It Works
