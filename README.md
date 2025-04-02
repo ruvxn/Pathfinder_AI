@@ -5,12 +5,12 @@ Pathfinder_AI is a part of Assignment 2A for the COS30019 - Introduction to Arti
 
 ## Project Structure
 
-[Project Structure](Assets/structure.png)
+![Project Structure](Assets/structure.png)
 
 
 ##  How It Works
 
-Search methods are implemented as a class with a `.search(graph, origin, destination)` method. The input graph is taken from the input text file stored in `tests/test*.py` by using `utils/graph.py`.
+Search methods are implemented as a class with a `search(self, graph, origin, destination)` method. The input graph is taken from the input text file stored in `tests/test*.py` by using `utils/graph.py`.
 
 For heuristics we have used the Euclidean distance  implemented in `utils/heuristics.py` because this is based on a 2D graph environment. This is used by GBFS and A* methods.
 
@@ -20,7 +20,7 @@ For heuristics we have used the Euclidean distance  implemented in `utils/heuris
 
 Use the command line to run the script with your input graph file and method:
 
-python3 search.py <path_to_input_text_file> <method>
+python3 search.py <path_to_input_text_file> <search_method>
 
 **Example:**
 
@@ -30,8 +30,8 @@ python3 search.py tests/test2.txt DFS
 
 The execution output required by te assignment looks like this,
 
-<filename> <method>  
-<goal> <number_of_nodes_in_path>  
+<input_text_filename> <search_method>  
+<destination_goal> <number_of_nodes_in_path>  
 <full_path>
 
 **Example:**
