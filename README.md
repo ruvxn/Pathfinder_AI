@@ -20,7 +20,7 @@ For heuristics we have used the Euclidean distance  implemented in `utils/heuris
 
 Use the command line to run the script with your input graph file and method:
 
-python3 search.py <path_to_input_text_file> <search_method>
+`python3 search.py <path_to_input_text_file> <search_method>`
 
 **Example:**
 
@@ -30,9 +30,9 @@ python3 search.py tests/test2.txt DFS
 
 The execution output required by te assignment looks like this,
 
-<input_text_filename> <search_method>  
+`<input_text_filename> <search_method>  
 <destination_goal> <number_of_nodes_in_path>  
-<full_path>
+<full_path>`
 
 **Example:**
 
@@ -46,14 +46,14 @@ tests/test2.txt GBFS
 - `test3.txt` – Larger graph with branching  
 - `test4.txt` – Multi-destination graph with fork paths  
 
-## ✍️ Notes
+## Notes
 
 - Follows assignment requirement: stop at **first reachable goal**  
 - Expands nodes **in ascending order**, using the `sorted()` fucntion
 - All methods return path and cost which is an additional feature  
 - The structure of this code is implemented with further expandibility in mind.
 
-## 👨‍💻 Author
+## Authors
 
 - Student names: 
     *Ananda Pathiranage Ruveen Thathsilu Jayasinghe - 104317649*  
