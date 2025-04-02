@@ -5,7 +5,6 @@ from methods.bfs import BFS
 from methods.gbfs import GBFS
 
 
-
 def main():
     if len(sys.argv) != 3: # The number of arguments includes script, file and search method
         print("Usage: python search.py <graph_file> <search_method>") 
@@ -65,8 +64,8 @@ def main():
     elif method == "CUS2":
         pass
     else:
-        print(f"[!] Invalid search method: {method}")
-        print("Try: DFS, BFS, UCS, GBFS, ASTAR, CUS1, CUS2")
+        print(f"Invalid search method: {method}")
+        print("Try: DFS, BFS, GBFS, ASTAR, CUS1, CUS2")
 
 
 if __name__ == '__main__':
