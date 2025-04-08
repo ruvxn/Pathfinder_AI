@@ -15,10 +15,16 @@ def generate_tests():
     
     #generate nodes with random coordinates
 
-    nodes = {
-        i: (random.randint(0, 10), random.randint(0, 10))
-        for i in range(1, num_nodes + 1)
-    }
+    used_coords = set() # keeping tyrack of used node cordinates so that no two nodes are at the same position
+    nodes = {}
+
+    for i in range(1, num_nodes + 1):
+        while True:
+            x, y = random.randint(0, 10), random.randint(0, 10)
+            if (x, y) not in used_coords:
+                used_coords.add((x, y))
+                nodes[i] = (x, y)
+                break
 
     # Generate edges
     edges = set()
