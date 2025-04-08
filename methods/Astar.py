@@ -1,5 +1,4 @@
-import networkx as nx 
-import matplotlib.pyplot as plt
+
 from utils.heuristics.py import euclidean_distance
 from utils.graph import neighbors
 from queue import PriorityQueue
