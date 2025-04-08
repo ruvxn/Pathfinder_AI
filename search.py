@@ -3,6 +3,7 @@ from utils.graph import Graph
 from methods.dfs import DFS
 from methods.bfs import BFS
 from methods.gbfs import GBFS
+from methods.cus1 import CUS1
 
 
 def main():
@@ -55,12 +56,18 @@ def main():
         print(" ".join(str(n) for n in path))
 
 
-
-
     elif method == "ASTAR":
         pass
     elif method == "CUS1":
-        pass
+
+        search_method= CUS1()
+        path, cost = search_method.search(graph, graph.origin, graph.destination)
+
+        print(f"{filename} {method}")
+        goal_node = path[-1]
+        print(f"{goal_node} {len(path)}")
+        print(" ".join(str(n) for n in path))
+
     elif method == "CUS2":
         pass
     else:
