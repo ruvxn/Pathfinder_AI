@@ -5,7 +5,7 @@ from queue import PriorityQueue
 
 
 class ASTAR:
-    def Search(self, graph, origin, destinations):
+    def search(self, graph, origin, destinations):
 
         target = list(destinations.keys())[0]
 
