@@ -19,14 +19,12 @@ def main():
     graph = Graph()
     graph.load_file(filename)
 
-    #print("graph loaded successfully")
-    #print(f"Origin: {graph.origin}")
-    #print(f"Destinations: {list(graph.destination.keys())}")
-
     if method == "DFS":
 
         search_method = DFS()  
         path = search_method.search(graph, graph.origin, graph.destination)
+        
+        
 
         print(f"{filename} {method}")
         goal_node = path[-1]
