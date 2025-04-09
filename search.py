@@ -15,44 +15,62 @@ def main():
     filename = sys.argv[1]
     method = sys.argv[2].upper()
 
-    #load from input file
+    #load from input file 
     graph = Graph()
     graph.load_file(filename)
 
-    if method == "DFS":
+#clearing redundancy in dfs,bfs,gbfs printing
+    search_methods_1 = {
+        "DFS": DFS,
+        "BFS": BFS,
+        "GBFS": GBFS,
+    }
 
-        search_method = DFS()  
-        path = search_method.search(graph, graph.origin, graph.destination)
-        
-        
-
-        print(f"{filename} {method}")
-        goal_node = path[-1]
-        print(f"{goal_node} {len(path)}")
-        print(" ".join(str(n) for n in path))
-
-
-    elif method == "BFS":
-        
-        search_method = BFS()
-        path  = search_method.search(graph, graph.origin, graph.destination)
-
-        print(f"{filename} {method}")
-        goal_node = path[-1]
-        print(f"{goal_node} {len(path)}")
-        print(" ".join(str(n) for n in path))
-
-
-
-    elif method == "GBFS":
-
-        search_method= GBFS()
+    if method in search_methods_1:
+        search_method = search_methods_1[method]()
         path = search_method.search(graph, graph.origin, graph.destination)
 
         print(f"{filename} {method}")
         goal_node = path[-1]
         print(f"{goal_node} {len(path)}")
         print(" ".join(str(n) for n in path))
+    
+
+
+    #if method == "DFS":
+
+        #search_method = DFS()  
+        #path = search_method.search(graph, graph.origin, graph.destination)
+        
+        
+
+       # print(f"{filename} {method}")
+       # goal_node = path[-1]
+       # print(f"{goal_node} {len(path)}")
+       # print(" ".join(str(n) for n in path))
+
+
+   # elif method == "BFS":
+        
+        #search_method = BFS()
+       # path  = search_method.search(graph, graph.origin, graph.destination)
+
+      #  print(f"{filename} {method}")
+       # goal_node = path[-1]
+       # print(f"{goal_node} {len(path)}")
+       # print(" ".join(str(n) for n in path))
+
+
+
+   # elif method == "GBFS":
+
+       # search_method= GBFS()
+      #  path = search_method.search(graph, graph.origin, graph.destination)
+
+       # print(f"{filename} {method}")
+       # goal_node = path[-1]
+       # print(f"{goal_node} {len(path)}")
+       # print(" ".join(str(n) for n in path))
 
 
     elif method == "ASTAR":
