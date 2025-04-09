@@ -11,7 +11,7 @@ class Astar:
 
         OpenSet = PriorityQueue()  #creates OpenSet as a priorityQueue 
         
-        OpenSet.put((0,0 [Origin]))  #pushes origin into the OpenSet 
+        OpenSet.put((0,0 [origin]))  #pushes origin into the OpenSet 
 
         Parent = set() #initalizes an empty set for visted (Since no nodes have been visited yet)
 
