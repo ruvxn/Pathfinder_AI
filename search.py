@@ -36,43 +36,6 @@ def main():
         print(" ".join(str(n) for n in path))
     
 
-
-    #if method == "DFS":
-
-        #search_method = DFS()  
-        #path = search_method.search(graph, graph.origin, graph.destination)
-        
-        
-
-       # print(f"{filename} {method}")
-       # goal_node = path[-1]
-       # print(f"{goal_node} {len(path)}")
-       # print(" ".join(str(n) for n in path))
-
-
-   # elif method == "BFS":
-        
-        #search_method = BFS()
-       # path  = search_method.search(graph, graph.origin, graph.destination)
-
-      #  print(f"{filename} {method}")
-       # goal_node = path[-1]
-       # print(f"{goal_node} {len(path)}")
-       # print(" ".join(str(n) for n in path))
-
-
-
-   # elif method == "GBFS":
-
-       # search_method= GBFS()
-      #  path = search_method.search(graph, graph.origin, graph.destination)
-
-       # print(f"{filename} {method}")
-       # goal_node = path[-1]
-       # print(f"{goal_node} {len(path)}")
-       # print(" ".join(str(n) for n in path))
-
-
     elif method == "ASTAR":
         
         search_method= ASTAR()
