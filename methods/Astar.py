@@ -5,9 +5,9 @@ from queue import PriorityQueue
 
 
 class Astar:
-    def Search(Self, Graph, Origin, Goal ):
+    def Search(Self, graph, origin, destination ):
 
-        target = list(Goal.keys())[0]
+        target = list(destination.keys())[0]
 
         OpenSet = PriorityQueue()  #creates OpenSet as a priorityQueue 
         
