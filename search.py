@@ -26,7 +26,7 @@ def main():
     if method == "DFS":
 
         search_method = DFS()  
-        path, cost = search_method.search(graph, graph.origin, graph.destination)
+        path = search_method.search(graph, graph.origin, graph.destination)
 
         print(f"{filename} {method}")
         goal_node = path[-1]
@@ -37,7 +37,7 @@ def main():
     elif method == "BFS":
         
         search_method = BFS()
-        path, cost = search_method.search(graph, graph.origin, graph.destination)
+        path  = search_method.search(graph, graph.origin, graph.destination)
 
         print(f"{filename} {method}")
         goal_node = path[-1]
@@ -49,7 +49,7 @@ def main():
     elif method == "GBFS":
 
         search_method= GBFS()
-        path, cost = search_method.search(graph, graph.origin, graph.destination)
+        path = search_method.search(graph, graph.origin, graph.destination)
 
         print(f"{filename} {method}")
         goal_node = path[-1]
