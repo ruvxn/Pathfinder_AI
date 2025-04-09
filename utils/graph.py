@@ -17,6 +17,7 @@ class Graph:
         self.edges[(node1, node2)] = path_cost
 
 # Get path cost
+
     def path_cost(self, node1, node2):
 
         return self.edges.get((node1, node2))
