@@ -1,5 +1,5 @@
 
-from utils.heuristics.py import euclidean_distance
+from utils.heuristics import euclidean_distance
 from utils.graph import neighbors
 from queue import PriorityQueue
 
