@@ -5,6 +5,7 @@ from methods.bfs import BFS
 from methods.gbfs import GBFS
 from methods.cus1 import CUS1
 from methods.Astar import ASTAR
+from methods.cus2 import CUS2
 
 
 def main():
