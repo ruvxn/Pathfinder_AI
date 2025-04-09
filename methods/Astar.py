@@ -1,11 +1,11 @@
 
 from utils.heuristics import euclidean_distance
-from utils.graph import neighbors
+
 from queue import PriorityQueue
 
 
 class Astar:
-    def Search(Self, graph, origin, destination ):
+    def Search(self, graph, origin, destination ):
 
         target = list(destination.keys())[0]
 
@@ -33,14 +33,14 @@ class Astar:
                         print("Entered if statement 3")
                         Gscore = (SumCost + Weight)
                         print(Gscore) #debugging
-                        Hscore = eculidean_distance(graph.nodes[neighbor], graph.Nodes[target]) #check this since my imports are being cooked
+                        Hscore = euclidean_distance(graph.nodes[neighbor], graph.Nodes[target]) #check this since my imports are being cooked #calls the Eculidean function and the return value is assigned to Hscore 
                         print(Hscore) #debugging
-                        Fscore = (Hscore + Gscore)
+                        Fscore = (Hscore + Gscore) #Fscore is used to determine is the algorithm is moving in the correct direction. 
 
                         
                         print(Fscore) #debugging
-                        UpdatedPath = Path + [neighbor]    
-                        OpenSet.put((Fscore, Gscore, UpdatedPath))
+                        UpdatedPath = Path + [neighbor]    #updates the path with the new path 
+                        OpenSet.put((Fscore, Gscore, UpdatedPath)) #this into the openset (prio q)
 
         return None, float('inf')
 
