@@ -1,7 +1,11 @@
 import random
+import os
 
 def generate_tests():
     
+    folder_path = "./tests"  
+    os.makedirs(folder_path, exist_ok=True)
+
     #get user input for required values
 
     num_nodes = int(input("Enter number of nodes for map: "))
@@ -9,6 +13,14 @@ def generate_tests():
     destinations = input("Enter destination nodes separated by commas(4,8): ")
     filename = input("Enter name for output file: ")
     max_edges_per_node = int(input("Enter maximum edges for nodes: "))
+
+    filepath = os.path.join(folder_path, filename)
+
+    #check if file already exists
+    if os.path.exists(filepath):
+        print(f"File '{filename}' already exists. Please choose a different name.")
+        return
+    
 
     #get destination list from user inputs
     destination_nodes = list(map(int, destinations.strip().split(",")))
@@ -46,7 +58,7 @@ def generate_tests():
 
 
     #write to file
-    with open(filename, 'w') as f:
+    with open(filepath, 'w') as f:
         f.write("Nodes:\n")
         for node, (x, y) in nodes.items():
             f.write(f"{node}:({x},{y})\n")
