@@ -4,7 +4,7 @@ from methods.dfs import DFS
 from methods.bfs import BFS
 from methods.gbfs import GBFS
 from methods.cus1 import CUS1
-from methods.Astar import Astar
+from methods.Astar import ASTAR
 
 
 def main():
@@ -59,7 +59,7 @@ def main():
 
     elif method == "ASTAR":
         
-        search_method= Astar()
+        search_method= ASTAR()
         path, cost = search_method.search(graph, graph.origin, graph.destination)
 
         print(f"{filename} {method}")
