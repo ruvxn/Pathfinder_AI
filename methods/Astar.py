@@ -21,24 +21,25 @@ class ASTAR:
             CurrentNode = Path[-1]   
             
             if CurrentNode == target: 
-                print("Destination Node Found!") #debugging 
+                print("Destination Node Found!:", Path) #debugging 
+                
                 return Path, SumCost
             
             if CurrentNode not in Parent: 
                 Parent.add(CurrentNode) 
-                print("Entered second if") #debugging
+                #print("Entered second if") #debugging
                 for neighbor, Weight in graph.neighbors(CurrentNode): #referenced your code (assume my python is why the "graph.neighors" isn't working check on yours)
-                    print("Entered For loop") #debugging
+                    #print("Entered For loop") #debugging
                     if neighbor not in Parent: 
-                        print("Entered if statement 3")
+                        #print("Entered if statement 3")
                         Gscore = (SumCost + Weight)
-                        print(Gscore) #debugging
+                        #print(Gscore) #debugging
                         Hscore = euclidean_distance(graph.nodes[neighbor], graph.nodes[target]) #check this since my imports are being cooked #calls the Eculidean function and the return value is assigned to Hscore 
-                        print(Hscore) #debugging
+                        #print(Hscore) #debugging
                         Fscore = (Hscore + Gscore) #Fscore is used to determine is the algorithm is moving in the correct direction. 
 
                         
-                        print(Fscore) #debugging
+                        #print(Fscore) #debugging
                         UpdatedPath = Path + [neighbor]    #updates the path with the new path 
                         OpenSet.put((Fscore, Gscore, UpdatedPath)) #this into the openset (prio q)
 

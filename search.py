@@ -32,7 +32,7 @@ def main():
 
         print(f"{filename} {method}")
         goal_node = path[-1]
-        print(f"{goal_node} {len(path)}")
+        print("GoalNode: "f"{goal_node}", "Length: "f"{len(path)}")
         print(" ".join(str(n) for n in path))
     
 
@@ -43,7 +43,8 @@ def main():
 
         print(f"{filename} {method}")
         goal_node = path[-1]
-        print(f"{goal_node} {len(path)}")
+        
+        print("GoalNode: "f"{goal_node}", "Length: "f"{len(path)}")
         print(" ".join(str(n) for n in path))
 
     elif method == "CUS1":
@@ -53,7 +54,7 @@ def main():
 
         print(f"{filename} {method}")
         goal_node = path[-1]
-        print(f"{goal_node} {len(path)}")
+        print("GoalNode: "f"{goal_node}", "Length: "f"{len(path)}")
         print(" ".join(str(n) for n in path))
 
     elif method == "CUS2":
