@@ -1,17 +1,17 @@
 
-from utils.heuristics import euclidean_distance
+from utils.heuristics.py import euclidean_distance
 
 from queue import PriorityQueue
 
 
-class Astar:
+class ASTAR:
     def Search(self, graph, origin, destinations):
 
         target = list(destinations.keys())[0]
 
         OpenSet = PriorityQueue()  #creates OpenSet as a priorityQueue 
         
-        OpenSet.put((0,0 [origin]))  #pushes origin into the OpenSet 
+        OpenSet.put((0,0, [origin]))  #pushes origin into the OpenSet 
 
         Parent = set() #initalizes an empty set for visted (Since no nodes have been visited yet)
 
