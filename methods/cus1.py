@@ -24,7 +24,7 @@ class CUS1:
                 visited.add(current_node)
 
                 #see the neightbor nodes to visit
-                for neighbor, edge_cost in graph.neighbors(current_node):
+                for neighbor, edge_cost in sorted(graph.neighbors(current_node)):
                     if neighbor not in visited:
                         
                         total_cost = current_cost + edge_cost
