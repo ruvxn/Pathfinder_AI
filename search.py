@@ -29,12 +29,16 @@ def main():
 
     if method in search_methods_1:
         search_method = search_methods_1[method]()
-        path = search_method.search(graph, graph.origin, graph.destination)
+        path, visited = search_method.search(graph, graph.origin, graph.destination)
 
         print(f"{filename} {method}")
-        goal_node = path[-1]
-        print("GoalNode: "f"{goal_node}", "Length: "f"{len(path)}")
-        print(" ".join(str(n) for n in path))
+        if path is None:
+            print("No path found.")
+        else:
+            goal_node = path[-1]
+            print("Visited nodes:", visited)  # Debugging
+            print(f"{goal_node} {len(visited)}")
+            print(" ".join(str(n) for n in path))
 
 
     elif method == "ASTAR":
@@ -44,7 +48,7 @@ def main():
 
         print(f"{filename} {method}")
         goal_node = path[-1]
-        
+
         print("GoalNode: "f"{goal_node}", "Length: "f"{len(path)}")
         print(" ".join(str(n) for n in path))
 

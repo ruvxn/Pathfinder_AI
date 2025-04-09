@@ -10,13 +10,16 @@ class BFS:
             current = path[-1]
 
             if current in destination:
-                return path
+                visited.add(current)
+                return path, visited
 
             if current not in visited:
                 visited.add(current)
 
                 #getting neighbors and filtering visited from unvisitied streamlined
-                neighbors = sorted(graph.neighbors(current))  
-                unvisited = filter(lambda pair: pair[0] not in visited, neighbors) #filter out where funtion is false 
-                new_paths = map(lambda pair: path + [pair[0]], unvisited) #maps lambda function to all iterables 
+                neighbors = sorted(graph.neighbors(current))
+                unvisited = filter(lambda pair: pair[0] not in visited, neighbors) #filter out where funtion is false
+                new_paths = map(lambda pair: path + [pair[0]], unvisited) #maps lambda function to all iterables
                 queue.extend(new_paths)
+
+        return None, visited # visited nodes and exception when no path was found

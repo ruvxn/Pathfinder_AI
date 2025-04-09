@@ -6,11 +6,12 @@ class DFS:
         visited = set()
 
         while stack:
-            path = stack.pop()                                                      #pop is used for getting the last element LIFO 
+            path = stack.pop()                                                      #pop is used for getting the last element LIFO
             current = path[-1]
 
-            if current in destination:                                              
-                return path
+            if current in destination:
+                visited.add(current)                                                # if current is in destination, add it to visited
+                return path, visited # the path to the destination and visited nodes
 
             if current not in visited:
                 visited.add(current)
@@ -20,3 +21,5 @@ class DFS:
                 unvisited = filter(lambda pair: pair[0] not in visited, neighbors)  # filter out where function is false
                 new_paths = map(lambda pair: path + [pair[0]], unvisited)           # lambda fucntion maps to all iterables
                 stack.extend(new_paths)
+
+        return None, visited # viqsited nodes and exceptioin when no path was found
