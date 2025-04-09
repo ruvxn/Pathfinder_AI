@@ -5,9 +5,9 @@ from queue import PriorityQueue
 
 
 class Astar:
-    def Search(self, graph, origin, destination ):
+    def Search(self, graph, origin, destinations):
 
-        target = list(destination.keys())[0]
+        target = list(destinations.keys())[0]
 
         OpenSet = PriorityQueue()  #creates OpenSet as a priorityQueue 
         
@@ -33,7 +33,7 @@ class Astar:
                         print("Entered if statement 3")
                         Gscore = (SumCost + Weight)
                         print(Gscore) #debugging
-                        Hscore = euclidean_distance(graph.nodes[neighbor], graph.Nodes[target]) #check this since my imports are being cooked #calls the Eculidean function and the return value is assigned to Hscore 
+                        Hscore = euclidean_distance(graph.nodes[neighbor], graph.nodes[target]) #check this since my imports are being cooked #calls the Eculidean function and the return value is assigned to Hscore 
                         print(Hscore) #debugging
                         Fscore = (Hscore + Gscore) #Fscore is used to determine is the algorithm is moving in the correct direction. 
 
