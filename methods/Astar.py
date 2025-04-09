@@ -20,7 +20,7 @@ class ASTAR:
             
             CurrentNode = Path[-1]   
             
-            if CurrentNode in target: 
+            if CurrentNode == target: 
                 print("Destination Node Found!") #debugging 
                 return Path, SumCost
             
