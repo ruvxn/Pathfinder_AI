@@ -1,5 +1,6 @@
 import pygame
 import sys
+import time
 
 from utils.graph import Graph
 
@@ -18,10 +19,12 @@ WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("TreeBased Visualisation")
 
 # colors
-WHITE = (255, 255, 255)
-GREY = (200, 200, 200)
-BLACK = (0, 0, 0)
-BLUE = (0, 102, 204)
+WHITE = (255, 255, 255) #background
+GREY = (200, 200, 200) #grid 
+BLACK = (0, 0, 0) # text
+BLUE = (0, 102, 204) # Normal node color
+YELLOW = (255, 255, 0)  # Visited node color
+
 
 METHODS = { "DFS": DFS, "BFS": BFS,  "GBFS": GBFS, "ASTAR": ASTAR, "CUS1": CUS1,"CUS2": CUS2}
 
@@ -51,16 +54,16 @@ def transform_coords(x, y):
     return (x * GRID_SPACING + X_OFFSET, y * GRID_SPACING + Y_OFFSET)
 
 
-
-def draw_node(x, y, label):
+def draw_node(x, y, label, node_colors):
     screen_pos = transform_coords(x, y)
     print(f"DEBUG: Drawing node '{label}' at ({x}, {y}) => screen {screen_pos}")  # Debugging
-    
-    pygame.draw.circle(WINDOW, BLUE, screen_pos, NODE_RADIUS) #node 
+    color = node_colors.get(label, BLUE)  # defualting the color to blue
 
-    text = FONT.render(str(label), True, WHITE) 
+    pygame.draw.circle(WINDOW, color, screen_pos, NODE_RADIUS)
+    text = FONT.render(str(label), True, WHITE)
     text_rect = text.get_rect(center=screen_pos)
     WINDOW.blit(text, text_rect)
+
 
 
 
@@ -100,27 +103,60 @@ def main():
 
     searcher = METHODS[method_name]()  # initialize search class for the method
 
-    running = True
+    graph = Graph()
+    #graph.load_file("tests/PathFinder-test.txt")  hardcoded file path UPDATE THIS TO TAKE INPUTS 
+    graph.load_file(filename) # use graph.load_file(filename) to load the graph from the file 
+    print(f"DEBUG: Loaded {len(graph.nodes)} nodes and {len(graph.edges)} edges")  # debug
+
+    # Run the search algorithm
+    if method_name in ["BFS", "DFS", "GBFS"]:
+        path, visited = searcher.search(graph, graph.origin, graph.destination)
+    elif method_name == "CUS1":
+        path, visited, _ = searcher.search(graph, graph.origin, graph.destination)
+    else:  # For ASTAR, CUS2 because they return cost
+        path, _ = searcher.search(graph, graph.origin, graph.destination)
+        visited = path
+
+    node_colors = {}  # keep track of node colors
+    node_colors[graph.origin] = BLUE  # CHANGE LATER    
+
+
+    running = True 
+    first_frame = True
+
     while running:
         WINDOW.fill(WHITE)
         draw_grid()
 
-        graph = Graph()
-        #graph.load_file("tests/PathFinder-test.txt")  hardcoded file path UPDATE THIS TO TAKE INPUTS 
-        graph.load_file(filename) # use graph.load_file(filename) to load the graph from the file 
-        
 
-        print(f"DEBUG: Loaded {len(graph.nodes)} nodes and {len(graph.edges)} edges")  # debug
 
         # start with the edges because the layout should show behind the nodes
         for (n1, n2), _ in graph.edges.items():
             start = transform_coords(*graph.nodes[n1])
             end = transform_coords(*graph.nodes[n2])
             draw_arrow(start, end)
+        
+        # visited notes with delay for showing travers
+        if first_frame:
+            for node in visited:
+                if node != graph.origin and node not in graph.destination:
+                    node_colors[node] = YELLOW  # mark it as visited
+                    WINDOW.fill(WHITE)
+                    draw_grid()
+                    for (n1, n2), _ in graph.edges.items():
+                        draw_arrow(transform_coords(*graph.nodes[n1]), transform_coords(*graph.nodes[n2]))
+                    for node_id, (x, y) in graph.nodes.items():
+                        draw_node(x, y, node_id, node_colors)
+                    pygame.display.update()
+                    time.sleep(0.3) # adjust delya to fit the animation after testing
+            first_frame = False
+
+
 
         # draw nodes on top of the edges drawn 
-        for node_id, (x, y) in graph.nodes.items(): 
-            draw_node(x, y, node_id)
+        for node_id, (x, y) in graph.nodes.items():
+            draw_node(x, y, node_id, node_colors)
+
 
         for event in pygame.event.get(): 
             if event.type == pygame.QUIT:
