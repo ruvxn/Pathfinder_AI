@@ -3,6 +3,13 @@ import sys
 
 from utils.graph import Graph
 
+from methods.dfs import DFS
+from methods.bfs import BFS
+from methods.gbfs import GBFS
+from methods.Astar import ASTAR
+from methods.cus1 import CUS1
+from methods.cus2 import CUS2
+
 
 pygame.init()
 
@@ -15,6 +22,9 @@ WHITE = (255, 255, 255)
 GREY = (200, 200, 200)
 BLACK = (0, 0, 0)
 BLUE = (0, 102, 204)
+
+METHODS = { "DFS": DFS, "BFS": BFS,  "GBFS": GBFS, "ASTAR": ASTAR, "CUS1": CUS1,"CUS2": CUS2}
+
 
 GRID_SPACING = 80
 FONT = pygame.font.SysFont("Arial", 20)
@@ -40,6 +50,8 @@ def draw_grid():
 def transform_coords(x, y):
     return (x * GRID_SPACING + X_OFFSET, y * GRID_SPACING + Y_OFFSET)
 
+
+
 def draw_node(x, y, label):
     screen_pos = transform_coords(x, y)
     print(f"DEBUG: Drawing node '{label}' at ({x}, {y}) => screen {screen_pos}")  # Debugging
@@ -50,8 +62,11 @@ def draw_node(x, y, label):
     text_rect = text.get_rect(center=screen_pos)
     WINDOW.blit(text, text_rect)
 
+
+
 # connecting node paths from arrow
 def draw_arrow(start, end, color=BLACK):
+    
     print(f"DEBUG: Drawing arrow from {start} to {end}")  # Debugging
     start_vec = pygame.math.Vector2(start) 
     end_vec = pygame.math.Vector2(end)
@@ -64,19 +79,37 @@ def draw_arrow(start, end, color=BLACK):
 
     # arrow head
     arrow_size = 10
+
     left = end_offset - direction * arrow_size + direction.rotate(135) * arrow_size * 0.5
     right = end_offset - direction * arrow_size + direction.rotate(-135) * arrow_size * 0.5
-    
+
     pygame.draw.polygon(WINDOW, color, [end_offset, left, right])
 
 def main():
+
+    if len(sys.argv) != 3: 
+        print("Please run the script like this: python3 GUI.py <graph_file> <search_method>")
+        sys.exit(1)
+
+    filename = sys.argv[1]  
+    method_name = sys.argv[2].upper()
+
+    if method_name not in METHODS:
+        print(f"'{method_name}' is not a valid method. Choose from: DFS, BFS, GBFS, ASTAR, CUS1, CUS2")
+        sys.exit(1)
+
+    searcher = METHODS[method_name]()  # initialize search class for the method
+
     running = True
     while running:
         WINDOW.fill(WHITE)
         draw_grid()
 
         graph = Graph()
-        graph.load_file("tests/PathFinder-test.txt")  # hardcoded file path UPDATE THIS TO TAKE INPUTS 
+        #graph.load_file("tests/PathFinder-test.txt")  hardcoded file path UPDATE THIS TO TAKE INPUTS 
+        graph.load_file(filename) # use graph.load_file(filename) to load the graph from the file 
+        
+
         print(f"DEBUG: Loaded {len(graph.nodes)} nodes and {len(graph.edges)} edges")  # debug
 
         # start with the edges because the layout should show behind the nodes
