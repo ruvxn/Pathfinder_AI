@@ -6,7 +6,7 @@ class GBFS:
     def goal_coordinates(self, graph, destination):
         for dest in destination:
             return graph.nodes[dest]
-        
+
 
     def search(self, graph, origin, destination):
         frontier = PriorityQueue()
@@ -16,11 +16,12 @@ class GBFS:
         goal_coords = self.goal_coordinates(graph, destination)
 
         while not frontier.empty():
-            h_score, path = frontier.get() 
+            h_score, path = frontier.get()
             current = path[-1]
 
             if current in destination:
-                return path
+                visited.add(current)                                                        # if current is in destination, add it to visited
+                return path, visited # the path to the destination and visited nodes
 
             if current not in visited:
                 visited.add(current)
@@ -39,6 +40,6 @@ class GBFS:
                 for item in scored_paths:
                     frontier.put(item)
 
+        return None, visited # visited nodes and exception when no path was found
 
-    
-    
+
