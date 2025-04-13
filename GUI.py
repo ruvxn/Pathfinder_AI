@@ -59,7 +59,7 @@ def transform_coords(x, y):
 
 def draw_node(x, y, label, node_colors):
     screen_pos = transform_coords(x, y)
-    print(f"DEBUG: Drawing node '{label}' at ({x}, {y}) => screen {screen_pos}")  # Debugging
+   # print(f"DEBUG: Drawing node '{label}' at ({x}, {y}) => screen {screen_pos}")  # Debugging
     color = node_colors.get(label, BLUE)  # defualting the color to blue
 
     pygame.draw.circle(WINDOW, color, screen_pos, NODE_RADIUS)
@@ -73,7 +73,7 @@ def draw_node(x, y, label, node_colors):
 # connecting node paths from arrow
 def draw_arrow(start, end, color=BLACK):
     
-    print(f"DEBUG: Drawing arrow from {start} to {end}")  # Debugging
+    #print(f"DEBUG: Drawing arrow from {start} to {end}")  # Debugging
     start_vec = pygame.math.Vector2(start) 
     end_vec = pygame.math.Vector2(end)
 
@@ -91,7 +91,29 @@ def draw_arrow(start, end, color=BLACK):
 
     pygame.draw.polygon(WINDOW, color, [end_offset, left, right])
 
+def start_screen():
+    waiting = True # wait for user to act
+    while waiting:
+        WINDOW.fill(WHITE)
+        draw_grid()
+
+        message = "To display the node traversal, press ENTER"
+        text = FONT.render(message, True, BLACK)
+        text_rect = text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
+        WINDOW.blit(text, text_rect)
+        pygame.display.update()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:  # getting the key press
+                if event.key == pygame.K_RETURN: # enter key press check
+                    waiting = False #user has acted 
+
 def main():
+
+    start_screen() # shows start screen to prompt user to hit enter to styart visualisatipon
 
     if len(sys.argv) != 3: 
         print("Please run the script like this: python3 GUI.py <graph_file> <search_method>")
@@ -109,7 +131,7 @@ def main():
     graph = Graph()
     #graph.load_file("tests/PathFinder-test.txt")  hardcoded file path UPDATE THIS TO TAKE INPUTS 
     graph.load_file(filename) # use graph.load_file(filename) to load the graph from the file 
-    print(f"DEBUG: Loaded {len(graph.nodes)} nodes and {len(graph.edges)} edges")  # debug
+   # print(f"DEBUG: Loaded {len(graph.nodes)} nodes and {len(graph.edges)} edges")  # debug
 
     # Run the search algorithm
     if method_name in ["BFS", "DFS", "GBFS"]:
@@ -161,7 +183,7 @@ def main():
                     for node_id, (x, y) in graph.nodes.items():
                         draw_node(x, y, node_id, node_colors)
                     pygame.display.update()
-                    time.sleep(0.3) # adjust delya to fit the animation after testing
+                    time.sleep(1) # adjust delya to fit the animation after testing
             first_frame = False
 
         # final path
@@ -187,7 +209,7 @@ def main():
                         draw_node(x, y, node_id, node_colors)
 
                     pygame.display.update()
-                    time.sleep(0.3)
+                    time.sleep(1)
 
              # destination node color is beeing turned to orange, to fix that
             for dest in graph.destination:
