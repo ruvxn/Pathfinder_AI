@@ -8,7 +8,7 @@ Pathfinder_AI is a part of Assignment 2A for the COS30019 - Introduction to Arti
 
 ```
 Pathfinder_AI/
-│
+│__ Assignment2A.pdf     #project report 
 ├── Assets/              # Visuals, structure diagrams
 ├── methods/             # DFS, BFS, GBFS, ASTAR, CUS1, CUS2
 ├── pseudocode/          # Pseudocode references
