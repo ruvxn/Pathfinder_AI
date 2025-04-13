@@ -16,6 +16,7 @@ class ASTAR:
         Parent = set() #initalizes an empty set for visted (Since no nodes have been visited yet)
 
         while not OpenSet.empty():  # Opens a loop that will only end when the Prio queue (Openset) is empty
+            
             Fscore, SumCost, Path = OpenSet.get()    #from the open set, it retrieves the Fscore and cost/weight + its path (for the first time looping it will be the origin node)
             
             CurrentNode = Path[-1]   

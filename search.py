@@ -63,7 +63,7 @@ def main():
         else:
             goal_node = path[-1]
             print("Visited nodes:", visited)  # debugging
-            print(f"{goal_node} {len(visited)}")
+            print("GoalNode: "f"{goal_node}", "Length: "f"{len(path)}")
             print(" ".join(str(n) for n in path))
 
 
@@ -76,7 +76,7 @@ def main():
 
         goal_node = path[-1]
 
-        print(f"{goal_node} {len(path)}")
+        print("GoalNode: "f"{goal_node}", "Length: "f"{len(path)}")
 
         print(" ".join(str(n) for n in path))
     else:
