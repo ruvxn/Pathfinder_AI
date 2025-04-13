@@ -23,7 +23,10 @@ WHITE = (255, 255, 255) #background
 GREY = (200, 200, 200) #grid 
 BLACK = (0, 0, 0) # text
 BLUE = (0, 102, 204) # Normal node color
-YELLOW = (255, 255, 0)  # Visited node color
+GREEN = (0, 255, 0)  # Origin node
+RED = (255, 0, 0)    # Destination node
+YELLOW = (255, 255, 0)  # Visited node 
+ORANGE = (255, 165, 0) # Final Path
 
 
 METHODS = { "DFS": DFS, "BFS": BFS,  "GBFS": GBFS, "ASTAR": ASTAR, "CUS1": CUS1,"CUS2": CUS2}
@@ -118,7 +121,17 @@ def main():
         visited = path
 
     node_colors = {}  # keep track of node colors
-    node_colors[graph.origin] = BLUE  # CHANGE LATER    
+    path_edges = {}  # for coloring final path arrows
+    #node_colors[graph.origin] = BLUE   CHANGE LATER    
+    
+
+    # Origin node in green
+    node_colors[graph.origin] = GREEN
+
+    # Destination(s) in red
+    for dest in graph.destination:
+        node_colors[dest] = RED
+
 
 
     running = True 
@@ -132,9 +145,9 @@ def main():
 
         # start with the edges because the layout should show behind the nodes
         for (n1, n2), _ in graph.edges.items():
-            start = transform_coords(*graph.nodes[n1])
-            end = transform_coords(*graph.nodes[n2])
-            draw_arrow(start, end)
+            color = path_edges.get((n1, n2), BLACK)
+            draw_arrow(transform_coords(*graph.nodes[n1]), transform_coords(*graph.nodes[n2]), color)
+
         
         # visited notes with delay for showing travers
         if first_frame:
@@ -150,6 +163,35 @@ def main():
                     pygame.display.update()
                     time.sleep(0.3) # adjust delya to fit the animation after testing
             first_frame = False
+
+        # final path
+            if path:
+                for i in range(1, len(path)):
+                    # Color current node as PINK
+                    node_colors[path[i]] = ORANGE
+
+                    # Arrows
+                    edge = (path[i - 1], path[i])
+                    if edge in graph.edges:
+                        path_edges[edge] = ORANGE
+
+                    # Draw everything
+                    WINDOW.fill(WHITE)
+                    draw_grid()
+
+                    for (n1, n2), _ in graph.edges.items():
+                        color = path_edges.get((n1, n2), BLACK)
+                        draw_arrow(transform_coords(*graph.nodes[n1]), transform_coords(*graph.nodes[n2]), color)
+
+                    for node_id, (x, y) in graph.nodes.items():
+                        draw_node(x, y, node_id, node_colors)
+
+                    pygame.display.update()
+                    time.sleep(0.3)
+
+             # destination node color is beeing turned to orange, to fix that
+            for dest in graph.destination:
+                node_colors[dest] = RED
 
 
 

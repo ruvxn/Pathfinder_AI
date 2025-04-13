@@ -21,7 +21,7 @@ class GBFS:
 
             if current in destination:
                 visited.add(current)                                                        # if current is in destination, add it to visited
-                return path, visited # the path to the destination and visited nodes
+                return path, visited # the path to the destination and all visited nodes (including ones that arent in the final path)
 
             if current not in visited:
                 visited.add(current)

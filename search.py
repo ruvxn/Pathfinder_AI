@@ -36,9 +36,9 @@ def main():
             print("No path found.")
         else:
             goal_node = path[-1]
-            print("Visited nodes:", visited)  # Debugging
-            print(f"{goal_node} {len(visited)}")
-            print(" ".join(str(n) for n in path))
+            print("Visited nodes:", visited,"FOR DEBUGGING")  # Debugging
+            print(f"Destination:{goal_node} Nodes Visited: {len(visited)}")
+            print("Path:"," ".join(str(n) for n in path))
 
 
     elif method == "ASTAR":
