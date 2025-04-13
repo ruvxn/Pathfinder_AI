@@ -6,7 +6,7 @@ from queue import PriorityQueue
 
 class ASTAR:
     def search(self, graph, origin, destinations):
-
+        visited_count = 0 
         target = list(destinations.keys())[0]
 
         OpenSet = PriorityQueue()  #creates OpenSet as a priorityQueue 
@@ -14,7 +14,7 @@ class ASTAR:
         OpenSet.put((0,0, [origin]))  #pushes origin into the OpenSet 
 
         Parent = set() #initalizes an empty set for visted (Since no nodes have been visited yet)
-
+        
         while not OpenSet.empty():  # Opens a loop that will only end when the Prio queue (Openset) is empty
             
             Fscore, SumCost, Path = OpenSet.get()    #from the open set, it retrieves the Fscore and cost/weight + its path (for the first time looping it will be the origin node)
@@ -23,6 +23,7 @@ class ASTAR:
             
             if CurrentNode == target: 
                 print("Destination Node Found!:", Path) #debugging 
+                print("Total nodes visited:", visited_count)
                 
                 return Path, SumCost
             
